@@ -2,7 +2,7 @@ import { describe, it, expect, vi, afterEach, beforeEach, type MockInstance } fr
 import { ApiRequest } from "./apiRequest";
 import { TokenAuthStrategy } from "../auth/tokenAuthStrategy";
 
-describe("CacheController", () => {
+describe("ApiRequest", () => {
 
   let apiRequest: ApiRequest;
 
