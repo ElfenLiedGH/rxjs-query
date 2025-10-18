@@ -15,10 +15,10 @@ describe("ApiRequest", () => {
   };
 
   beforeEach(() => {
+    vi.useFakeTimers();
     fetchSpy = vi
       .spyOn(globalThis, "fetch")
       .mockResolvedValue(mockResponse as Response);
-    vi.useFakeTimers();
     apiRequest = new ApiRequest(fetch, new TokenAuthStrategy(() => "token"));
   });
 
