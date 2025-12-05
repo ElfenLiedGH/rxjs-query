@@ -1,7 +1,7 @@
 {
   "name": "rxjs-query",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
@@ -19,6 +19,7 @@
   "scripts": {
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
+    "test:full": "npm run lint && npm run test:run",
     "test": "vitest",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
@@ -26,6 +27,7 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
+    "@smwb/di": "^1.0.6",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
@@ -36,6 +38,7 @@
     "@types/node": "^24.7.2",
     "@vitest/browser": "^3.2.4",
     "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
     "eslint": "^9.37.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.1",
