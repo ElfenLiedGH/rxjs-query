@@ -143,7 +143,6 @@ describe('RxJsRequest', () => {
     await vi.waitFor(() => {
       const calledWith = fetchSpy.mock.calls[0];
       expect(calledWith[1]).toHaveProperty('body', formData);
-      // Check that Content-Type is not explicitly set (should be null/undefined)
       const headers = calledWith[1]?.headers as Headers;
       expect(headers.get('Content-Type')).toBeNull();
     });
@@ -163,7 +162,6 @@ describe('RxJsRequest', () => {
     await vi.waitFor(() => {
       const calledWith = fetchSpy.mock.calls[0];
       expect(calledWith[1]).toHaveProperty('body', JSON.stringify(jsonData));
-      // Check that Content-Type is preserved (it should be in the headers object)
       const headers = calledWith[1]?.headers as Headers;
       expect(headers.get('Content-Type')).toBe('application/json');
     });
@@ -178,11 +176,9 @@ describe('RxJsRequest', () => {
       executionOptions
     );
     subject.subscribe(mockCallback);
-
-    // Wait a bit to ensure no request is made
+    
     await vi.advanceTimersByTimeAsync(100);
-
-    // No fetch call should have been made
+    
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
@@ -195,11 +191,7 @@ describe('RxJsRequest', () => {
       executionOptions
     );
     subject.subscribe(mockCallback);
-
-    // Initially no fetch call should have been made
     expect(fetchSpy).not.toHaveBeenCalled();
-
-    // Execute the request
     execute?.();
 
     await vi.waitFor(() => {
