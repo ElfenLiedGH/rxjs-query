@@ -42,8 +42,7 @@ export class ApiRequest implements HTTPRequestService {
 
     const headers = new Headers(optionalHeaders);
     this.authStrategy.applyAuth(headers);
-
-    // When sending FormData, let the browser set the Content-Type header automatically
+    
     if (fetchOptions.body instanceof FormData) {
       headers.delete('Content-Type');
     }
@@ -90,14 +89,11 @@ export class ApiRequest implements HTTPRequestService {
       }
 
       try {
-        // Handle different response types
         const contentType = response.headers.get('content-type');
         if (contentType?.includes('application/json')) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return await response.json();
         } else {
-          // For non-JSON responses or when content-type is not available, try to parse as JSON first
-          // and fall back to text if that fails
           try {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             return await response.json();
