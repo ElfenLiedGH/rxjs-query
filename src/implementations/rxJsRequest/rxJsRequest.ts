@@ -93,7 +93,6 @@ export class RxJsRequest<E = ErrorData> implements ObservableRequestService<E> {
       this.createApiRequest(query, { ...options, ignoreCache: true });
 
     const execute = () => {
-      // If already pending or cached and not ignoring cache, don't execute again
       if (
         (!ignoreCache && this.requestCache.has(requestKey)) ||
         this.pendingRequests.has(requestKey)
@@ -140,13 +139,11 @@ export class RxJsRequest<E = ErrorData> implements ObservableRequestService<E> {
           this.pendingRequests.delete(requestKey);
         });
     };
-
-    // If lazy is true, don't execute immediately, just return the execute function
+    
     if (lazy) {
       return { refetch, subject, execute };
     }
-
-    // If not lazy, execute immediately
+    
     if (
       (!ignoreCache && this.requestCache.has(requestKey)) ||
       this.pendingRequests.has(requestKey)
